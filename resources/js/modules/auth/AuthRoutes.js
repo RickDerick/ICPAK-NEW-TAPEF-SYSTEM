@@ -1,6 +1,8 @@
 import AuthLayout from '@/layouts/views/AuthLayout.vue';
 import Page from '@/modules/auth/views/Page.vue';
 import Login from '@/modules/auth/components/Login.vue';
+import RegLanding from '@/modules/auth/views/RegLanding.vue';
+import Signup from '@/modules/auth/components/Signup.vue';
 
 export default [
   {
@@ -26,11 +28,16 @@ export default [
             name: 'Login',
             component: Login,
           },
-          // {
-          //   path: 'signup/:category',
-          //   name: 'Sign Up',
-          //   component: Signup,
-          // },
+          {
+            path: 'landing',
+            name: 'RegLanding',
+            component: RegLanding,
+          },
+          {
+            path: 'signup/:category',
+            name: 'Signup',
+            component: Signup,
+          },
           // {
           //   path: 'activate',
           //   name: 'Activation Page',
