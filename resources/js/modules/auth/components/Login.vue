@@ -95,9 +95,9 @@
                 block
                 variant="outlined"
                 class="font-weight-bold"
-                
+                :to="{ name:'RegLanding'}"
               >
-                Activate
+                Register
               </v-btn>
             </v-card-actions>
           </v-form>
