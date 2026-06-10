@@ -14,12 +14,12 @@
           <div class="text-center mb-6">
            
 
-            <h4
-              class="text-h5 font-weight-bold mb-2"
+            <h3
+              class="text-h3 font-weight-bold mb-2"
               style="color: var(--v-theme-primary);"
             >
               Welcome Back!
-            </h4>
+            </h3>
 
             <p
               class="text-subtitle-2 px-2 px-sm-4"
@@ -44,7 +44,7 @@
               placeholder="Email address"
               persistent-placeholder
               :rules="rules.email"
-              class="mb-4"
+              class="mb-2"
               style="background-color: var(--v-theme-gray);"
               @keyup.enter.prevent="login"
             />
@@ -66,7 +66,7 @@
               @keyup.enter.prevent="login"
             />
 
-            <div class="d-flex justify-end mb-4">
+            <div class="d-flex justify-end mb-2">
               <v-btn
                 variant="text"
                 class="text-decoration-underline px-0"
@@ -148,12 +148,21 @@ async function login() {
 
 <style scoped>
 .login-card {
-  padding: 32px;
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 @media (max-width: 600px) {
   .login-card {
-    padding: 20px;
+    padding: 12px;
+    max-width: 360px;
   }
 }
+
+/* Tighten common margin utilities inside the card to reduce height */
+.login-card .mb-6 { margin-bottom: 12px !important; }
+.login-card .mb-4 { margin-bottom: 8px !important; }
+.login-card .mb-3 { margin-bottom: 6px !important; }
+.login-card h3, .login-card h4 { margin-bottom: 6px !important; }
 </style>

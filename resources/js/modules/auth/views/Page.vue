@@ -1,23 +1,21 @@
 <template>
   <v-app>
-    <!--TOOLBAR -->
     <v-app-bar color="primary">
       <v-container class="d-flex align-center">
-    <!-- Main logo -->
-    <v-img
-      :src="companyInformation.logoFull"
-      max-height="50"
-      max-width="180"
-      contain
-      class="mr-4"
-    />
+      <v-img
+        :src="companyInformation.IcpakLogo"
+        max-height="50"
+        max-width="180"
+        contain
+        class="mr-4"
+      />
 
     <!-- Vertical divider -->
     <div class="d-flex align-center logos-pair">
       <v-divider vertical class="mx-3 divider-white" />
 
       <v-img
-        :src="company2Information.logoFull"
+        :src="company2Information.KasnebLogo"
         max-height="50"
         max-width="180"
         width="120"
@@ -33,19 +31,16 @@
     <v-btn variant="text" to="/" class="text-white">Home</v-btn>
 
     <span class="ml-4 text-white">Welcome</span>
-  </v-container>
+    </v-container>
     </v-app-bar>
 
     <!--MAIN CONTENT -->
-    <v-main>
-      <v-container>
-
+    <v-main class="page-main">
+      <v-container class="pt-2">
           <router-view />
-
       </v-container>
     </v-main>
     <Footer />
-
   </v-app>
 </template>
 
@@ -63,12 +58,12 @@ const route = useRoute()
 //const store = useStore()
 
 const companyInformation = ref({
-  logoFull: '/images/cpa_logo.png',
+  IcpakLogo: '/images/cpa_logo.png',
   displayName: 'Institute of Certified Public Accountants of Kenya',
 })
 
 const company2Information = ref({
-  logoFull: '/images/kasneb-logo.png',
+  KasnebLogo: '/images/kasneb-logo.png',
   displayName: 'Kasneb',
   })
 
@@ -95,6 +90,15 @@ const role = ref('Trainee')
   
   .logos-pair {
     align-items: center;
+  }
+
+  .page-main {
+    padding-bottom: 80px; /* room for fixed footer (72px) + small gap */
+  }
+
+  /* tighten gap under the app bar */
+  .page-main .v-container {
+    padding-top: 8px !important;
   }
 }
 
