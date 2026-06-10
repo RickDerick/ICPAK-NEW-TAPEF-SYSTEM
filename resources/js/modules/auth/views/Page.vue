@@ -1,69 +1,58 @@
 <template>
-  <v-container fluid class="pa-0 fill-height">
-    <v-row no-gutters class="fill-height">
+  <v-app>
+    <!--TOOLBAR -->
+    <v-app-bar color="primary">
+      <v-container class="d-flex align-center">
+    <!-- Main logo -->
+    <v-img
+      :src="companyInformation.logoFull"
+      max-height="50"
+      max-width="180"
+      contain
+      class="mr-4"
+    />
 
-      <!-- LEFT SIDE -->
-      <v-col cols="12" md="6" class="d-flex align-center justify-center">
-        <v-card flat width="100%" max-width="500">
-          <v-card-text>
-            <!-- Logo -->
-            <div class="text-center mb-6">
-              <v-img
-                :src="companyInformation?.logoFull"
-                height="100"
-                contain
-              />
-            </div>
-            <router-view />
+    <!-- Vertical divider -->
+    <div class="d-flex align-center logos-pair">
+      <v-divider vertical class="mx-3 divider-white" />
 
-          </v-card-text>
-        </v-card>
-      </v-col>
+      <v-img
+        :src="company2Information.logoFull"
+        max-height="50"
+        max-width="180"
+        width="120"
+        contain
+        alt="partner logo"
+        class="ml-0"
+      />
+    </div>
 
-      <!-- RIGHT SIDE -->
-      <v-col
-        cols="12"
-        md="6"
-        class="d-none d-md-flex align-center justify-center auth-card text-white"
-      >
-        <!-- Overlay -->
-        <div class="auth-card-opacity"></div>
+    <v-spacer />
 
-        <!-- Content -->
-        <div class="auth-body text-center px-8">
-          <h2 class="mb-4">
-            ICPAK | KASNEB
-          </h2>
+    <v-btn variant="text" to="/search" class="text-white">Search</v-btn>
+    <v-btn variant="text" to="/" class="text-white">Home</v-btn>
 
-          <p class="mb-6">
-            TAPEF system stands for the Trainee Accountants Practical Experience Framework. It is a structured program developed jointly by the Institute of Certified Public Accountants of Kenya (ICPAK) and the Kenya Accountants and Secretaries National Examinations Board (KASNEB).
-          </p>
-
-          <!-- Signup Steps -->
-          <div v-if="route.name === 'Sign Up'" class="text-left">
-            <h4 class="mb-3">
-              Follow the steps to create an account:
-            </h4>
-
-            <ul>
-              <li
-                v-for="(item, i) in signupInformation"
-                :key="i"
-                v-html="item"
-              />
-            </ul>
-          </div>
-        </div>
-      </v-col>
-
-    </v-row>
-    <!-- <VerifyOTP /> -->
+    <span class="ml-4 text-white">Welcome</span>
   </v-container>
+    </v-app-bar>
+
+    <!--MAIN CONTENT -->
+    <v-main>
+      <v-container>
+
+          <router-view />
+
+      </v-container>
+    </v-main>
+    <Footer />
+
+  </v-app>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import Footer from '@/components/Footer.vue'
 //import { useStore } from 'vuex'
 // import VerifyOTP from './VerifyOTP.vue'
 import {ref} from 'vue'
@@ -72,68 +61,40 @@ import {ref} from 'vue'
 
 const route = useRoute()
 //const store = useStore()
-const signupInformation = [
-  `Enter a valid email address e.g <strong>email@example.com</strong>.`,
-  `Repeat the email address to confirm (<strong>must match</strong>).`,
-  `Enter your national ID number.`,
-  `Enter a valid phone number.`,
-  `Enter a password.`,
-  `Confirm your password.`,
-  `Check your info.`,
-  `Click <strong>Create Account</strong>.`,
-  `Receive OTP via SMS.`,
-  `Verify using OTP.`,
-  `You’ll be redirected to dashboard.`,
-]
-
 
 const companyInformation = ref({
   logoFull: '/images/cpa_logo.png',
   displayName: 'Institute of Certified Public Accountants of Kenya',
 })
+
+const company2Information = ref({
+  logoFull: '/images/kasneb-logo.png',
+  displayName: 'Kasneb',
+  })
+
+const role = ref('Trainee')
+
 </script>
 
 <style scoped lang="scss">
 .fill-height {
-  height: 100vh;
-}
-
-/* RIGHT SIDE BACKGROUND */
-.auth-card {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-image: url("/images/icpak-launch.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  /* Overlay */
-  &-opacity {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #000;
-    opacity: 0.8;
-    z-index: 1;
-  }
-
-  /* Content above overlay */
-  .auth-body {
-    position: relative;
-    z-index: 2;
-    max-width: 500px;
-  }
+  min-height: calc(100vh - 64px); 
 }
 
 /* Optional mobile tweak */
 @media (max-width: 992px) {
   .fill-height {
     height: auto;
+  }
+  
+  .divider-white {
+    background-color: rgba(255,255,255,0.6) !important;
+    width: 1px !important;
+    height: 36px !important;
+  }
+  
+  .logos-pair {
+    align-items: center;
   }
 }
 
