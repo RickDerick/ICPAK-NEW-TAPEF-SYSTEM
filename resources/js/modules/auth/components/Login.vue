@@ -25,7 +25,7 @@
               class="text-subtitle-2 px-2 px-sm-4"
               style="color: var(--v-theme-black);"
             >
-              Enter your email address and password to access your account.
+              For Supervisors Enter your email address or Member No to access your account.
             </p>
           </div>
 

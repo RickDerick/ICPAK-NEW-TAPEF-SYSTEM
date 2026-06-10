@@ -56,12 +56,7 @@ export default [
         ],
       },
 
-      // OTHER PAGES (outside auth split layout)
-      // {
-      //   path: 'landing',
-      //   name: 'Landing Page',
-      //   component: Landing,
-      // },
+      // OTHER PAGES (outside pages layout)
       // {
       //   path: 'init-profile',
       //   name: 'Initialize profile',

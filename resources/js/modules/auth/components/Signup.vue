@@ -132,6 +132,7 @@ const formData = reactive({
   memberNo: '',
   firstName: '',
   lastName: '',
+  category: category.value,
   confirmPassword: '',
 });
 
