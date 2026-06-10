@@ -32,14 +32,11 @@
         <!-- Content -->
         <div class="auth-body text-center px-8">
           <h2 class="mb-4">
-            My Company Name
+            ICPAK | KASNEB
           </h2>
 
           <p class="mb-6">
-            A member of the Institute is a person who holds a valid
-            Registration Certificate. A person is entitled for
-            registration if he or she undergoes a prescribed course
-            and passes the appropriate examinations.
+            TAPEF system stands for the Trainee Accountants Practical Experience Framework. It is a structured program developed jointly by the Institute of Certified Public Accountants of Kenya (ICPAK) and the Kenya Accountants and Secretaries National Examinations Board (KASNEB).
           </p>
 
           <!-- Signup Steps -->
