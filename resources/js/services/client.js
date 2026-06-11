@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiBaseUrl } from "@/environment";
+import { apiBaseUrl } from "@/environments";
 import AuthService from "@/modules/auth/AuthService";
 
 /**

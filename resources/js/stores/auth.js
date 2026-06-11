@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia';
 import AuthService from '@/modules/auth/AuthService'
 import constants from '@/stores/constants';
-import call from '@/modules/services';
+import call from '@/services';
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -30,10 +30,10 @@ export const useAuthStore = defineStore('auth', {
     },
 
     resetPassword(data) {
-      this.setAuthStoreLoader(true);
+      this.loading = true;
       call("post", constants.resetPassword, data)
         .then((res) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           if (res?.data?.data?.token) {
             AuthService.login(res.data.data.token, res.data.data.user);
             this.toast.success(res.data?.data?.message || 'Password reset successful', { autoClose: 3000 });
@@ -51,26 +51,26 @@ export const useAuthStore = defineStore('auth', {
         })
         .catch((err) => {
           this.toast.error(err?.response?.data?.message);
-          this.setAuthStoreLoader(false);
+          this.loading = false;
         });
     },
 
     register(data) {
-      this.setAuthStoreLoader(true);
+      this.loading = true;
       call("post", constants.register, data)
         .then((res) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           this.toast.success(res.data.message);
           this.openOtp(true);
         })
         .catch((err) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           this.toast.error(err?.response?.data?.message);
         });
     },
 
     login(data) {
-      this.setAuthStoreLoader(true);
+      this.loading = true;
       call("post", constants.login, data)
         .then((res) => {
           if (res.data.message === "Success") {
@@ -78,75 +78,75 @@ export const useAuthStore = defineStore('auth', {
             setTimeout(()=>{
               this.toast.success("Login successful");
             },500);
-            this.setAuthStoreLoader(false);
+            this.loading = false;
             const role = res.data?.data?.user?.role;
             const routeName = role === 'is_admin' ? 'AdminDashboard' : (role === 'reviewer' ? 'ReviewerDashboard' : 'Dashboard');
             this.router.push({ name: routeName });
           } else {
             if (res.data.message === "error") {
               this.toast.error(res?.data?.email[0]);
-              this.setAuthStoreLoader(false);
+              this.loading = false;
             }
           }
         })
         .catch((err) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           this.toast.error(err?.response?.data?.message);
         });
     },
 
     sendOtp(data) {
-      this.setAuthStoreLoader(true);
+      this.loading = true;
       call("post", constants.sendOtp, data)
         .then((res) => {
           this.toast.success(res.data.message);
         })
         .catch((err) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           this.toast.error(err?.response?.data?.message);
         });
     },
 
     forgotPassword(data) {
-      this.setAuthStoreLoader(true);
+      this.loading = true;
       call("post", constants.forgotPassword, data)
         .then((res) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           setTimeout(()=>{
             this.toast.success(res.data?.data?.message || "Reset link has been sent to your email");
           },500);
           this.router.push({ name: "Login" });
         })
         .catch((err) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           this.toast.error(err?.response?.data?.message);
         });
     },
 
      verifyforgotOtp(data) {
-      this.setAuthStoreLoader(true);
+      this.loading = true;
       call("post", constants.verifyForgotOtp, data)
         .then((res) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           this.toast.success("OTP successfully verified");
           this.router.push({ name: "setPassword" });
         })
         .catch((err) => {
-          this.setAuthStoreLoader(false);
+          this.loading = false;
           this.toast.error(err?.response?.data?.message);
         });
     },
 
     verifyOtp(data) {
-      this.setAuthStoreLoader(true);
+      this.loading = true;
       call("post", constants.verifyOtp, data)
       .then((res)=>{
-        this.setAuthStoreLoader(false);
+        this.loading = false;
         AuthService.login(res.data.data.token, res.data.data.user);
         this.router.push({ name: "Login" });
       })
       .catch((err) => {
-        this.setAuthStoreLoader(false);
+        this.loading = false;
         this.toast.error(err?.response?.data?.message);
       });
     },
