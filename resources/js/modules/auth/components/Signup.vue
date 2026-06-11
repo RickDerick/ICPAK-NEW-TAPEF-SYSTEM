@@ -92,26 +92,35 @@
                 />
             </v-card-text>
             <v-card-actions class="d-flex flex-row justify-end">
-                <v-btn @click="register" color="primary" class="mt-n5 text-white" variant="flat" block>
-                  Create Account
+                <v-btn @click="register" :disabled="loading" color="primary" class="mt-n5 text-white" variant="flat" block>
+                  <v-progress-circular
+                    v-if="loading"
+                    indeterminate
+                    color="white"
+                    size="20"
+                    width="2"
+                    class="mr-2"
+                  />
+                  <span v-if="!loading">Create Account</span>
+                  <span v-else>Creating...</span>
                 </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
 
-    <!-- <Verify :userEmail="userEmail" /> -->
+    <OtpModal :userEmail="userEmail" />
   </v-container>
 </template>
 
 <script setup>
 import { ref, reactive, computed } from 'vue';
 import { useRoute } from 'vue-router';
-//import Verify from './Verify.vue';
-//import { useAuthStore } from '@/stores/auth';
+import OtpModal from './OtpModal.vue';
+import { useAuthStore } from '@/stores/auth';
 
-//const authStore = useAuthStore();
-
+const authStore = useAuthStore();
+const loading = computed(() => authStore.loading);
 const showPassword = ref(false);
 const showConfPassword = ref(false);
 const userEmail = ref('');
